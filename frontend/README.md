@@ -3,7 +3,7 @@
 ![GitHub repo size](https://img.shields.io/badge/repo%20size-557KB-blue)
 ![GitHub contributors](https://img.shields.io/badge/contributors-1-yellow)
 
-This is a React app which take 5 document types in JSON format and displays the contents as Cards
+This is a React app which take 5 document types in a JSON format and displays the contents as Cards
 which are capable of being reordered via Drag n Drop.
 
 ## Getting Started with Link Station Frontend App
@@ -23,11 +23,12 @@ The page will reload if you make edits.
 
 ## Usage
 
-The page is already displays a grid of Cards for the document types provided by a static JSON file called "inputs".
+The page already displays a grid of Cards for the document types provided by a static JSON file called
+"inputs.json" in the "src/static/json" folder.
 
 Click on the cards to see their images being displayed as an overlay in the middle of the page.
 
-## ToDo
+## To-Do
 
 - Drag and drop feature to reorder the cards.
 - Call the REST API to save the cards and show last saved time when any changes are made to the order.
