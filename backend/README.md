@@ -1,6 +1,6 @@
 # Vector Full Stack Project - Back End App using FastAPI & PostgreSQL
 
-![GitHub repo size](https://img.shields.io/badge/repo%20size-557KB-blue)
+![GitHub repo size](https://img.shields.io/badge/repo%20size-17KB-blue)
 ![GitHub contributors](https://img.shields.io/badge/contributors-1-yellow)
 
 This is a back end application for our Vector Full Stack Front End (React) app which
