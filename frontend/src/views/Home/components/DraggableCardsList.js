@@ -105,17 +105,22 @@ const DraggableCardsList = () => {
     handleBackdropToggle();
   };
 
-  const handleOnDragEnd = (result) => {
+  /**
+   * Handler to that fired every time a card has been dragged and dropped
+   * @param {*} resultCard card that is dragged and ready to be dropped
+   * @returns nothing
+   */
+   const handleOnDragEnd = (resultCard) => {
     /* If the destination is null or dropped outside the list */
-    if (!result.destination) return;
+    if (!resultCard.destination) return;
 
     const documents = Array.from(documentTypes);
 
-    /* Use the source.index value to find our item from our new array and remove it using the splice method */
-    const [reorderedDocument] = documents.splice(result.source.index, 1);
+    /* Using the source.index value to find our item from our new array and remove it using the splice method */
+    const [reorderedCards] = documents.splice(resultCard.source.index, 1);
 
-    /* use our destination.index to add that item back into the array, but at it’s new location, hence splice */
-    documents.splice(result.destination.index, 0, reorderedDocument);
+    /* Use destination.index to add that item back into the array, but at it’s new location, hence splice */
+    documents.splice(resultCard.destination.index, 0, reorderedCards);
 
     /* Finally update state */
     updateDocumentTypes(documents);
