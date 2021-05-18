@@ -63,8 +63,8 @@ The page will reload if you make edits.
 
 ## Documentation and Usage
 
-    ```swagger - http://localhost:8000/docs
-    redoc - http://localhost:8000/redoc```
+    swagger - http://localhost:8000/docs
+    redoc - http://localhost:8000/redoc
 
 ## To-Do
 
