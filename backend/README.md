@@ -4,7 +4,7 @@
 ![GitHub contributors](https://img.shields.io/badge/contributors-1-yellow)
 
 This is a back end application for our Vector Full Stack Front End (React) app which
-is created using FastAPI and PostgreSQL. it stores the data from static json file from the Front End (React app)
+is created using FastAPI and PostgreSQL. It stores the static json file data from the Front End (React app)
 and updates the ordering/postions of the document types whenever the document type cards on the Front End app
 are reordered using Drag and Drop events.
 
@@ -68,7 +68,7 @@ The page will reload if you make edits.
 
 ## To-Do
 
-- Put API to save/update the document types data whenever the corresponding cards are reordered on the Front End
+- PUT API to save/update the document types data whenever the corresponding cards are reordered on the Front End
 
 ## Technologies Used
 
