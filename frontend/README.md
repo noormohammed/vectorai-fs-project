@@ -6,7 +6,7 @@
 This is a React app which take 5 document types in a JSON format and displays the contents as Cards
 which are capable of being reordered via Drag n Drop.
 
-## Getting Started with Vector Full Stack Project - Frontend App
+## Getting Started
 
 In the project directory, to install the packages and dependencies you can run:
 
