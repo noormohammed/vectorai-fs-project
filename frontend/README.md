@@ -28,9 +28,10 @@ The page already displays a grid of Cards for the document types provided by a s
 
 Click on the cards to see their images being displayed as an overlay in the middle of the page.
 
+Drag and drop feature to reorder the cards has been added and its working.
+
 ## To-Do
 
-- Drag and drop feature to reorder the cards.
 - Call the REST API to save the cards and show last saved time when any changes are made to the order.
   (Will complete this once the Back End is ready)
 
