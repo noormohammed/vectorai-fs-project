@@ -6,7 +6,7 @@
 This is a React app which take 5 document types in a JSON format and displays the contents as Cards
 which are capable of being reordered via Drag n Drop.
 
-## Getting Started with Link Station Frontend App
+## Getting Started with Vector Full Stack Project - Frontend App
 
 In the project directory, to install the packages and dependencies you can run:
 
@@ -45,7 +45,6 @@ Drag and drop feature to reorder the cards has been added and its working.
 - HMTL5
 - CSS
 - Axios
-- React Hook Form
 - ESLint
 - Prettier
 - Git
