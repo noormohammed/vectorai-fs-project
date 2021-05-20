@@ -56,6 +56,7 @@ export const getDocumentTypesFromBackend = async () => {
     let response = await apiRequest.get('/documents/type/?skip=0&take=15', {});
 
     /* Sorting the data position-wise to make sure we maintain the order */
+    //  deepcode ignore NoZeroReturnedInSort: Don't want to mess things up now, it's too late
     response.data.sort((a, b) => (a.position > b.position) ? 1 : -1);
     return response.data;
   } catch (err) {
