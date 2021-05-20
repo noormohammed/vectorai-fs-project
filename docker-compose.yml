@@ -1,0 +1,30 @@
+version: "3"
+services:
+  postgres_db:
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=123456789
+      - POSTGRES_DB=vector
+    restart: always
+  vector_backend:
+    build: ./backend
+    command: bash -c "alembic upgrade head && uvicorn main:app --host 0.0.0.0 --port 8000 --reload"
+    container_name: "vector-backend-container"
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./app:/app
+    depends_on:
+      - postgres_db
+  vector_frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    container_name: "vector-frontend-container"
+    stdin_open: true
+    volumes:
+      - ./frontend/node_modules:/usr/app/node_modules
+      - ./frontend:/usr/app
