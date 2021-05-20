@@ -52,19 +52,25 @@ In the project directory, to install the packages and dependencies you can run:
 Make sure to edit the .env file and update the DATABASE_URL according to your PostgreSQL database
 and access credentials.
 
+To make the database migrations, run the following command
+
+```
+alembic init alembic
+alembic revision — autogenerate -m "First commit"
+alembic upgrade head
+```
+
 In the project directory, to run the application you can run:
 
 #### `uvicorn main:app --reload`
 
 Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.
+Open [http://127.0.0.1:8000/](http://127.0.0.1:8000/) to view it in the browser.
 
 ## Documentation and Usage
 
-    swagger - http://localhost:8000/docs
-    redoc - http://localhost:8000/redoc
+    swagger - http://127.0.0.1:8000/docs
+    redoc - http://127.0.0.1:8000/redoc
 
 ## To-Do
 

@@ -4,7 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.gzip import GZipMiddleware
 
 
-app = FastAPI(title="Vector.ai - Back End")
+app = FastAPI(title="Vector.ai - Back End Application")
 
 # CORS settings can be configured here
 app.add_middleware(
