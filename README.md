@@ -56,10 +56,9 @@ Open [http://127.0.0.1:8000/](http://127.0.0.1:8000/) to view the Back End app i
 - Initially the front end displayed the cards using the data from statis json file. But later when
   the back end was ready, the logic was slightly changed to cater the requirements.
 
-      * The react app first checks if there is any data stored in the database by using the GET API.
+    * The react app first checks if there is any data stored in the database by using the GET API.
       (For the first time obviously the database table holding the data is empty.)
-
-      * So the app takes care of this by adding the statis json file data to the database on its first
+    * So the app takes care of this by adding the static json file data to the database on its first
       execution and the next subsequent executions/accesses to the front end app will always take the
       data present in the database so as long as it is available. Otherwise the aforementioned process
       kicks in again.
