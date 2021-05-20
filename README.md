@@ -66,7 +66,7 @@ Open [http://127.0.0.1:8000/](http://127.0.0.1:8000/) to view the Back End app i
 
 #### Challenges
 
-- Grid: Initially the cards were displayed using a Grid component. But it has it's limitations on the
+- Grid Layout: Initially the cards were displayed using a Grid component. But it has it's limitations on the
   requested feature reordering the cards via Drag and Drop. I tried making it work , spent a lot of
   time to come up wih a way to overcome this challenge but due to time constraints I looked for other
   options. Changed the Grid to a List component, and worked on the styling of the cards to appear as a
@@ -75,12 +75,13 @@ Open [http://127.0.0.1:8000/](http://127.0.0.1:8000/) to view the Back End app i
 - Time: There were a lot of features to be implemented in a very short time as I am working full time
   for my current employment.
 
-### Back End Development
+### Back End Development & Docker Compose
 
 #### Logic
 
 - The backend was straight forwards to create the required POST, GET & PUT APIs to serve the features
   requested in the problem task.
+- Dockerfiles for the Front & Back Ends are in their respective directories and the docker-compose.yml in the root.
 
 #### Challenges
 
