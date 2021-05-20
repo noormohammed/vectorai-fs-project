@@ -8,6 +8,12 @@ from app import app
 from db import db
 from fastapi import HTTPException
 
+
+@app.get("/")
+def index():
+    return {"title": "Vector.ai - Back End Application"}
+
+
 """ Create new document type """
 
 
