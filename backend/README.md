@@ -56,7 +56,7 @@ To make the database migrations, run the following command
 
 ```
 alembic init alembic
-alembic revision — autogenerate -m "First commit"
+alembic revision --autogenerate -m "First commit"
 alembic upgrade head
 ```
 
