@@ -55,7 +55,7 @@ Tying up of the Front End application with the Back End Application is complete.
 
 - yarn
 - Create React App
-- ReactJS
+- React.js
 - Javascript
 - Material UI
 - HMTL5
