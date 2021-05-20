@@ -1,6 +1,6 @@
 # vectorai-fs-project
 
-Vector Full Stack Project using React, FastAPI, PostgresQL and Docker Compose.
+Vector Full Stack Project using React, FastAPI, PostgreSQL and Docker Compose.
 
 This is consists of the following applications:
 
