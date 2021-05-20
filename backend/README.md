@@ -72,10 +72,6 @@ Open [http://127.0.0.1:8000/](http://127.0.0.1:8000/) to view it in the browser.
     swagger - http://127.0.0.1:8000/docs
     redoc - http://127.0.0.1:8000/redoc
 
-## To-Do
-
-- PUT API to save/update the document types data whenever the corresponding cards are reordered on the Front End
-
 ## Technologies Used
 
 - FastAPI
