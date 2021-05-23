@@ -2,7 +2,7 @@
 
 ## Vector Full Stack Project using React, FastAPI, PostgreSQL and Docker Compose.
 
-This is consists of the following applications:
+This consists of the following applications:
 
 - Front End Application developed using React
 - Back End Application developed using Python and FastAPI
