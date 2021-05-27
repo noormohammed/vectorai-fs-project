@@ -23,9 +23,8 @@ export const apiRequest = axios.create({
  */
 export const postDocumentTypesToBackend = async (dtObject) => {
   try {
-    dtObject.map(async (dtItem) => {
-      await apiRequest.post('/documents/type/', dtItem);
-    });
+    let response = await apiRequest.post('/documents/type/', dtObject);
+    return response.data;
   } catch (err) {
     console.log(err.message);
   }
