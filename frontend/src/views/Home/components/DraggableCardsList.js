@@ -13,7 +13,7 @@ import DocumentTypeCard from './DocumentTypeCard';
 import { getDocumentTypesFromBackend, postDocumentTypesToBackend, updateDocumentTypeinBackend } from 'api/requests';
 
 /* Import the initial static inputs/document types & corresponding images from the json files to generate the cards */
-import DocumentTypesJSON from 'static/json/inputs';
+import DocumentTypesStaticInputJSON from 'static/json/inputs';
 import ImagesJSON from 'static/json/images';
 import { Typography } from '@material-ui/core';
 
@@ -69,11 +69,15 @@ const useStyles = makeStyles((theme) => ({
  */
 const DraggableCardsList = () => {
   const classes = useStyles();
-  const [documentTypes, setDocumentTypes] = useState({});
   const [open, setOpen] = useState(false);
   const [overlayImageLink, setOverlayImageLink] = useState(null);
-  const [shouldSaveDocumentTypes, setShouldSaveDocumentTypes] = useState(false);
-  const [lastSavedTime, setLastSavedTime] = useState(null)
+  const [lastSavedTime, setLastSavedTime] = useState(null);
+
+  /* Initial State of document types & its flag for update*/
+  const [documentTypesState, setDocumentTypesState] = useState({
+    update: false,
+    documentTypes: {},
+  });
 
   /**
   * Handler for closing the Backdrop
@@ -112,7 +116,7 @@ const DraggableCardsList = () => {
   };
 
   /**
-   * Handler to that fired every time a card has been dragged and dropped
+   * Handler which is fired every time a card has been dragged and dropped
    * @param {*} dragInformation card that is dragged and ready to be dropped
    * @returns nothing
    */
@@ -120,7 +124,7 @@ const DraggableCardsList = () => {
     /* If the destination is null or dropped outside the list */
     if (!dragInformation.destination) return;
 
-    const documents = Array.from(documentTypes);
+    const documents = Array.from(documentTypesState.documentTypes);
 
     /* Using the source.index value to find our item from our new array and remove it using the splice method */
     const [draggedCard] = documents.splice(dragInformation.source.index, 1);
@@ -134,11 +138,11 @@ const DraggableCardsList = () => {
       return dtItems;
     });
 
-    /* Finally update state */
-    setDocumentTypes(reorderedDocuments);
-
-    /* Also, save them in the backend */
-    setShouldSaveDocumentTypes(true);
+    /* Finally update state, also, save them in the backend */
+    setDocumentTypesState({
+      update: true,
+      documentTypes: reorderedDocuments
+    });
   };
 
   /**
@@ -146,24 +150,31 @@ const DraggableCardsList = () => {
    */
   useEffect(() => {
     const getInitialDocumentTypesJSON = async () => {
+      handleBackdropToggle();
+
       /* Fetch JSON data from backend, if no data then save from the static JSON file */
       let initialInputs = await getDocumentTypesFromBackend();
 
       if (!initialInputs) {
+
+        initialInputs = DocumentTypesStaticInputJSON;
+
         /* Probably this is the first time saving of the JSON data to Backend */
-        await postDocumentTypesToBackend(DocumentTypesJSON);
+        initialInputs.map(async (dtItem) => {
+          const response = await postDocumentTypesToBackend(dtItem);
 
-        /* Now try fetching again */
+          if (response && 'id' in response) dtItem['id'] = response.id;
 
-        /* The fetch data kicks in too early without waiting for the post to finish, hence setTimeout */
-        /* There must be a more efficient way to do this. */
-        setTimeout(async () => {
-          initialInputs = await getDocumentTypesFromBackend();
-          setDocumentTypes(initialInputs);
-        }, 100);
-      } else {
-        setDocumentTypes(initialInputs);
+        });
+
       }
+
+      setDocumentTypesState(prevState => ({
+        update: prevState.update,
+        documentTypes: initialInputs
+      }));
+
+      handleBackdropClose();
     };
 
     getInitialDocumentTypesJSON();
@@ -178,12 +189,12 @@ const DraggableCardsList = () => {
   useEffect(() => {
     const reOrderDocumentTypes = async () => {
 
-      if (shouldSaveDocumentTypes === false) return;
+      if (documentTypesState.update === false) return;
 
       handleBackdropToggle();
 
       /* Save the reordered cards to the backend */
-      await updateDocumentTypeinBackend(documentTypes);
+      await updateDocumentTypeinBackend(documentTypesState.documentTypes);
 
       // The loading spinner would never show as the APIs are processing at high speeds
       // For the sake of this task, I am trying to show the loading spinner for 3 seconds
@@ -191,7 +202,10 @@ const DraggableCardsList = () => {
         handleBackdropClose();
 
         /* Save only when the drag and drop action is executed */
-        setShouldSaveDocumentTypes(false);
+        setDocumentTypesState(prevState => ({
+          update: false,
+          documentTypes: prevState.documentTypes
+        }));
 
         /* Storing the time when the cards were saved in the backend */
         setLastSavedTime(Date.now());
@@ -203,15 +217,15 @@ const DraggableCardsList = () => {
 
     return () => clearInterval(myInterval);
 
-  }, [documentTypes, shouldSaveDocumentTypes]);
+  }, [documentTypesState]);
 
   return (
     <React.Fragment>
       <DragDropContext onDragEnd={handleOnDragEnd}>
-        <Droppable droppableId="documentTypes" direction="horizontal">
+        <Droppable droppableId="documentTypesState" direction="horizontal">
           {(provided) => (
             <List component="ul" className={classes.list} {...provided.droppableProps} ref={provided.innerRef}>
-              {documentTypes.length && documentTypes.map(({type, title}, index) => (
+              {documentTypesState.documentTypes.length && documentTypesState.documentTypes.map(({type, title}, index) => (
                 <Draggable key={type} draggableId={type} index={index}>
                   {(provided) => (
                     <ListItem
@@ -243,7 +257,7 @@ const DraggableCardsList = () => {
           ) : (
             <div className={classes.progress}>
               <CircularProgress color="secondary" />
-              {shouldSaveDocumentTypes && (
+              {documentTypesState.update && (
                 <Typography variant="subtitle1" component="h1" style={{color: '#fff'}}>
                   Last Saved: {lastSavedTime ? moment(lastSavedTime).fromNow() : `Just Now`}
                 </Typography>
